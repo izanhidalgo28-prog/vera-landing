@@ -565,22 +565,28 @@ footer { background:var(--dark); padding:40px 60px; display:flex; align-items:ce
 </footer>
 
 <script>
-function enviarFormulario() {
+async function enviarFormulario() {
   var nombre = document.getElementById('f-nombre').value.trim();
   var clinica = document.getElementById('f-clinica').value.trim();
   var tel = document.getElementById('f-tel').value.trim();
   var email = document.getElementById('f-email').value.trim();
+  var tipo = document.getElementById('f-tipo').value;
 
   if (!nombre || !clinica || !tel || !email) {
     alert('Por favor rellena todos los campos obligatorios.');
     return;
   }
 
+  try {
+    await fetch('https://formspree.io/f/https://formspree.io/f/xredoglq', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({nombre, clinica, tel, email, tipo})
+    });
+  } catch(e) { console.error(e); }
+
   document.getElementById('contact-form').style.display = 'none';
   document.getElementById('success-msg').style.display = 'block';
-
-  // Aquí puedes conectar con un servicio de email como EmailJS o Formspree
-  console.log('Lead:', {nombre, clinica, tel, email});
 }
 
 // Smooth scroll para links del nav
