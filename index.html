@@ -578,7 +578,7 @@ async function enviarFormulario() {
   }
 
   try {
-    await fetch('https://formspree.io/f/https://formspree.io/f/xredoglq', {
+    await fetch('https://formspree.io/f/xredoglq', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({nombre, clinica, tel, email, tipo})
